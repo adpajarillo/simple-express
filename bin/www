@@ -40,7 +40,10 @@ io.on('connection', (socket) => {
 
   socket.on('message', (msg) => {
       console.log('message: ' + msg);
-      // Handle the message and potentially forward it to Salesforce or LINE API
+  });
+
+  socket.on('idom-message', (msg) => {
+    console.log('idom-message: ' + msg);
   });
 
   socket.on('disconnect', () => {

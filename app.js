@@ -12,6 +12,12 @@ const cors = require('cors');
 // var usersRouter = require('./routes/users');
 
 var app = express();
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any origin for testing
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {

@@ -13,13 +13,14 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST"]
+  }
+});
 
-app.use(cors({
-  origin: 'https://ruby-innovation-8308--dev0.sandbox.lightning.force.com', // Replace with your LWC app's origin
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-}));
+app.use(cors());
 
 io.on('connection', (socket) => {
   console.log('a user connected');

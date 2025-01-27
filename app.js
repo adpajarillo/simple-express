@@ -26,11 +26,6 @@ const io = socketIo(server, {
   }
 });
 
-io.configure(function() {
-  io.set('transports', ['xhr-polling']);
-  io.set('polling duration', 10);
-});
-
 app.use(cors());
 
 io.on('connection', (socket) => {

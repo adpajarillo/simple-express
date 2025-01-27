@@ -3,11 +3,31 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const http = require('http');
+const socketIo = require('socket.io');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('message', (msg) => {
+      console.log('message: ' + msg);
+      // Handle the message and potentially forward it to Salesforce or LINE API
+  });
+
+  socket.on('disconnect', () => {
+      console.log('user disconnected');
+  });
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

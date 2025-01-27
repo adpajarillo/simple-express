@@ -3,44 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const http = require('http');
-const socketIo = require('socket.io');
-const cors = require('cors');
+
 
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var app = express();
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Allow requests from any origin for testing
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "*", // Allow all origins
-    methods: ["GET", "POST"]
-  }
-});
-
-app.use(cors());
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('message', (msg) => {
-      console.log('message: ' + msg);
-      // Handle the message and potentially forward it to Salesforce or LINE API
-  });
-
-  socket.on('disconnect', () => {
-      console.log('user disconnected');
-  });
-});
-
 
 
 // view engine setup

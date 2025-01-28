@@ -37,7 +37,7 @@ const handleEventResponse = async (event) => {
 
     io.emit('idom-message', event.message.text);
   
-    res.send(response);
+    return response;
   };
 
 module.exports = {

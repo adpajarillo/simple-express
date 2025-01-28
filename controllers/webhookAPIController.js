@@ -1,4 +1,6 @@
 const lineMessagingService = require('../services/lineMessaging.service');
+const axios = require('axios');
+const lineConfig = require('../utils/lineConfig');
 
 let io;
 
@@ -21,6 +23,21 @@ const handleEvent = async (req, res) => {
     res.json(results);
 }
 
+const getUserProfile = async (userId) => {
+  const headers = {
+    Authorization: `Bearer ${lineConfig.channelAccessToken}`
+  };
+
+  try {
+    const response = await axios.get(`https://api.line.me/v2/bot/profile/${userId}`, { headers });
+    const profile = response.data;
+    
+    return profile.displayName;
+  } catch (error) {
+    console.error('Error getting user profile:', error);
+  }
+}
+
 const handleEventResponse = async (event) => {
     // Check if the event is a message event
     if (event.type !== 'message' || event.message.type !== 'text') {
@@ -34,7 +51,8 @@ const handleEventResponse = async (event) => {
       id: event.message.id,
       text: event.message.text,
       userId: event.source.userId,
-      timestamp: now.toLocaleString()
+      timestamp: now.toLocaleString(),
+      accountName: await getUserProfile(event.source.userId),
     };
 
     console.log(response);

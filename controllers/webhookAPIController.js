@@ -1,4 +1,4 @@
-const lineMessagingService = require('../services/lineMessaging.service');
+// const lineMessagingService = require('../services/lineMessaging.service');
 
 let io;
 
@@ -9,7 +9,7 @@ const setIoInstance = (ioInstance) => {
 const execute = async (req, res) => {
   // You can use the io instance here to emit events
   io.emit('idom-send-message', 'data');
-  await lineMessagingService.sendMessage('U69d626a5bb4af5c661dbc94904ea4b2a', 'data');
+  // await lineMessagingService.sendMessage('U69d626a5bb4af5c661dbc94904ea4b2a', 'data');
   res.send('Event emitted');
 };
 

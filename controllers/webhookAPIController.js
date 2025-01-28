@@ -35,10 +35,7 @@ const handleEventResponse = async (event) => {
       text: `You said: ${event.message.text}`
     };
   
-    // Use the client to reply to the message
-    await lineMessagingService.replyMessage(event.replyToken, response);
-
-    res.send('Event emitted');
+    res.send(response);
   };
 
 module.exports = {

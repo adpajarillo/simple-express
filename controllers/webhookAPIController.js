@@ -15,8 +15,6 @@ const execute = async (req, res) => {
 
 const handleEvent = async (req, res) => {
     const events = req.body.events;
-    console.log(events);
-    
 
     const results = await Promise.all(events.map(handleEventResponse));
   
@@ -28,14 +26,20 @@ const handleEventResponse = async (event) => {
     if (event.type !== 'message' || event.message.type !== 'text') {
       return null;
     }
+
+    const now = new Date();
   
     // Create a response message
     const response = {
-      type: 'text',
-      text: `You said: ${event.message.text}`
+      id: event.message.id,
+      text: event.message.text,
+      userId: event.source.userId,
+      timestamp: now.toLocaleString()
     };
 
-    io.emit('idom-message', event.message.text);
+    console.log(response);
+
+    io.emit('idom-message', response);
   
     return response;
   };

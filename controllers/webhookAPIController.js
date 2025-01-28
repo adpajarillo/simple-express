@@ -15,6 +15,8 @@ const execute = async (req, res) => {
 
 const handleEvent = async (req, res) => {
     const events = req.body.events;
+    console.log(events);
+    
 
     const results = await Promise.all(events.map(handleEventResponse));
   

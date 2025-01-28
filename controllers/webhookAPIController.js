@@ -34,6 +34,8 @@ const handleEventResponse = async (event) => {
       type: 'text',
       text: `You said: ${event.message.text}`
     };
+
+    io.emit('idom-message', event.message.text);
   
     res.send(response);
   };

@@ -4,7 +4,7 @@ var router = express.Router();
 const line = require('@line/bot-sdk');
 const lineConfig = require('../utils/lineConfig');
 
-router.post('/callback', line.middleware(lineConfig), webhookAPIController.handleEvent);
+router.post('/callback', webhookAPIController.handleEvent);
 
 
 module.exports = router;

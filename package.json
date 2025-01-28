@@ -6,6 +6,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@line/bot-sdk": "^9.5.3",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

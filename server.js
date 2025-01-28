@@ -9,13 +9,14 @@ const cors = require('cors');
 var app = require('./app');
 var debug = require('debug')('simple-experss:server');
 var webhookAPIController = require('./controllers/webhookAPIController');
+const bodyParser = require('body-parser');
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+app.use(bodyParser.json());
 /**
  * Create HTTP server.
  */
